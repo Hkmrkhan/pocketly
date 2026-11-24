@@ -1,267 +1,218 @@
-# Pocketly - Expense Tracking Application
+# 💰 Pocketly - Smart Daily Expense & Event Tracker
+
+<div align="center">
+  <img src="./assets/images/logoreal.png" alt="Pocketly Logo" width="120" height="120" style="border-radius: 60px;" />
+
+  <h3>A modern, multi-currency mobile expense tracker with event-based budgeting.</h3>
+
+  <p>
+    <a href="#-key-features">Features</a> •
+    <a href="#-architecture--tech-stack">Tech Stack</a> •
+    <a href="#-getting-started">Getting Started</a> •
+    <a href="#-database-setup">Database Setup</a> •
+    <a href="#-project-structure">Project Structure</a> •
+    <a href="#-license">License</a>
+  </p>
+
+  <p>
+    <img src="https://img.shields.io/badge/React_Native-0.81.5-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React Native" />
+    <img src="https://img.shields.io/badge/Expo-~54.0-000020?style=flat-square&logo=expo&logoColor=white" alt="Expo" />
+    <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Supabase-Database_%26_Auth-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
+    <img src="https://img.shields.io/badge/Platform-iOS_%7C_Android-black?style=flat-square" alt="Platform" />
+  </p>
+</div>
+
+---
 
 ## 📱 Overview
-Pocketly is a mobile expense tracking application that helps users manage their daily expenses and events with multi-currency support. Built with React Native and Expo, it provides a simple and intuitive interface for tracking spending.
 
-## 📊 Case Study: Real-World Usage
+**Pocketly** is a cross-platform mobile expense tracking application designed for individuals, travelers, and event organizers. Built with **React Native**, **Expo Router**, **TypeScript**, and **Supabase**, Pocketly eliminates the friction of manual conversions with real-time multi-currency support, flexible event grouping, and time-based spending analytics.
 
-### User Story: Sarah - International Business Traveler
-
-**Background:**
-- Sarah is a business consultant who travels between Pakistan and Europe
-- She needs to track expenses in different currencies
-- She wants a simple way to manage her spending
-
-**How Sarah Uses Pocketly:**
-
-**Week 1 - In Pakistan**
-- Opens Pocketly for first time (Default currency: USD)
-- Switches to PKR (Pakistani Rupee)
-- Adds expenses:
-  - Restaurant: Rs. 5,000
-  - Transport: Rs. 2,500
-  - Shopping: Rs. 15,000
-- **Total shown: Rs. 22,500**
-
-**Week 2 - Traveling to Europe**
-- Switches currency to EUR (Euro)
-- Adds new expenses:
-  - Hotel: €150
-  - Meals: €80
-  - Transport: €45
-- **Total shown: €275**
-
-**Week 3 - Monthly Review**
-- Switches to USD to see overall spending
-- All expenses automatically show in USD
-- Can switch back to any currency anytime
-- No manual calculations needed
-
-**Benefits Sarah Experienced:**
-- ✅ Easy currency switching with one tap
-- ✅ All expenses show in selected currency automatically
-- ✅ Can organize expenses by events (Business Trip 1, Business Trip 2)
-- ✅ Simple interface, no confusion
-- ✅ Perfect for expense reports
+---
 
 ## 🎯 Key Features
 
-### 1. Multi-Currency Support
-**What it does:**
-- Supports 4 currencies: USD, EUR, GBP, PKR
-- Default currency: USD (when you sign up)
-- Switch currency anytime with one tap
-- All amounts automatically convert to selected currency
+### 1. 💱 Multi-Currency Architecture
+* **Supported Currencies:** `USD ($)`, `EUR (€)`, `GBP (£)`, and `PKR (Rs.)`.
+* **Universal Normalization:** All expenses and events are automatically converted to and stored in base **USD** in the database, ensuring zero currency fragmentation.
+* **Instant Currency Switcher:** One-tap currency switching that dynamically converts all past, present, and future amounts across all cards, filters, and forms.
+* **Persistent Preferences:** The user's active currency selection is cached in `AsyncStorage` and restored across sessions.
 
-**How it works:**
-- User selects preferred currency from menu
-- All existing and new expenses display in that currency
-- Currency preference is saved automatically
+### 2. 💸 Comprehensive Expense Tracking
+* **Full CRUD Operations:** Add, view, edit, and delete transactions with instant state updates.
+* **Categorization:** Built-in categories with custom visual emojis and color accents:
+  * 🍔 **Food**
+  * 🚗 **Transport**
+  * 🛍️ **Shopping**
+  * 💡 **Bills**
+  * 🎬 **Entertainment**
+  * 💊 **Health**
+  * 📝 **Other**
+* **Confirmation Safety:** Double-confirmation modals for additions and deletions to prevent accidental clicks.
+* **Animated UI:** Smooth staggered card entry transitions powered by React Native Animated API.
 
-**Example:**
-- User adds: €100
-- Later switches to GBP: Shows £79
-- Switches back to EUR: Shows €100 again
+### 3. 📅 Event-Based Expense Tracking
+Group expenses by special occasions, trips, or home projects to track isolated budgets:
+* ✈️ **Trip / Vacation** (Travel spending)
+* 💍 **Wedding / Function** (Celebrations)
+* 🏠 **Home Renovation** (Renovation milestones)
+* 🛍️ **Shopping Spree** (Holiday & seasonal shopping)
+* 🎂 **Birthday / Party** (Gatherings)
+* 📋 **Custom Events** (Custom named occasions)
+* **Real-time Event Search:** Filter and search through events on the fly.
+* **Event Detail Screen:** Dedicated breakdowns showing total costs and item count per event.
 
-### 2. Expense Management
-**Add Expenses:**
-- Enter amount in your selected currency
-- Add description (e.g., "Lunch at restaurant")
-- Choose category (Food, Transport, Shopping, Bills, etc.)
-- Save with one tap
+### 4. 📊 Time-Based Summaries & Interactive Filtering
+* **Total Expenses Card:** High-level overview of total cumulative spending.
+* **Monthly Filter:** View spending for any month with an integrated 12-month picker.
+* **Day-Level Precision:** Interactive calendar date picker (`@react-native-community/datetimepicker`) to drill down to specific dates.
+* **Quick Reset:** One-click "Reset to Today" button to return to the current day's finances.
 
-**Edit Expenses:**
-- Tap any expense to edit
-- Amount shows in your current currency
-- Update and save
+### 5. 🔐 User Authentication & Profile Management
+* **Powered by Supabase Auth:** Secure user registration and login with email & password.
+* **Deep-Linked Password Recovery:** Request reset emails with direct deep-link handling (`mydailyexpensenew://auth/reset-password`) using Supabase PKCE flow.
+* **Interactive Onboarding:** 3-step swipeable visual tour for new users with gesture detection.
+* **User Profile & Settings:**
+  * Edit personal information (First Name, Last Name, and Email).
+  * Dark / Light mode toggle switch.
+  * Secure sign-out with confirmation prompt.
 
-**Delete Expenses:**
-- Remove unwanted expenses
-- Confirmation popup to prevent accidents
+---
 
-**Categories Available:**
-- 🍔 Food
-- 🚗 Transport
-- 🛍️ Shopping
-- 💡 Bills
-- 🎬 Entertainment
-- 💊 Health
-- 📝 Other
+## 🛠️ Architecture & Tech Stack
 
-### 3. Event-Based Tracking
-**What it does:**
-- Group expenses by events (trips, projects, occasions)
-- Track total spending per event
-- View all event expenses in one place
+```mermaid
+graph TD
+    Client["Pocketly Mobile App (Expo / React Native)"]
+    Storage["AsyncStorage (Currency, Local State)"]
+    Router["Expo Router (File-Based Navigation)"]
+    SupabaseAuth["Supabase Auth (PKCE / JWT Sessions)"]
+    SupabaseDB["Supabase PostgreSQL (RLS Protected)"]
 
-**Example Events:**
-- "Europe Trip 2024"
-- "Home Renovation"
-- "Monthly Groceries"
+    Client --> Router
+    Client --> Storage
+    Client --> SupabaseAuth
+    Client --> SupabaseDB
+```
 
-**Benefits:**
-- Organized expense tracking
-- Easy to see event-specific costs
-- Better financial planning
-
-### 4. Expense Summary
-**Features:**
-- See total spending at a glance
-- Filter by time (Today, This Month, All Time)
-- Category-wise breakdown
-- Real-time updates
-
-**Display:**
-- Total amount in selected currency
-- Number of expenses
-- Visual categorization
-
-### 5. User Authentication
-**Secure Login:**
-- Email and password authentication
-- Your data is private and secure
-- Each user has their own account
-
-**Profile Management:**
-- View your profile
-- **Edit Personal Details**: Update your First Name, Last Name, and Email Address.
-- **Password Management**: Secure usage of your account.
-- Logout option
-
-**Forgot Password:**
-- **Secure Recovery**: If you forget your password, request a reset link via email.
-- **Deep Linking**: Seamlessly open the app from the reset link to choose a new password.
-
-### 6. Smart Currency Conversion
-**How It Works:**
-
-| Action | What You See |
+| Layer | Technologies |
 | :--- | :--- |
-| **Add Expense** | Enter amount in current currency (e.g., €100) |
-| **Display** | Always shows in your selected currency |
-| **Switch Currency** | All amounts update automatically |
-| **Edit** | Edit in your current currency |
+| **Framework** | [React Native](https://reactnative.dev/) (`0.81.5`) & [Expo](https://expo.dev/) (`~54.0.30`) |
+| **Routing** | [Expo Router](https://docs.expo.dev/router/introduction/) (File-based tabs and stacks) |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) (`~5.9.2`) |
+| **Backend & DB** | [Supabase](https://supabase.com/) (PostgreSQL with Row Level Security) |
+| **State & Storage** | React Context API (`AuthContext`, `OnboardingContext`), `@react-native-async-storage/async-storage` |
+| **Icons & Animation** | `@expo/vector-icons` (Ionicons), `react-native-reanimated` |
 
-**Example Flow:**
-- Currency: EUR
-- Add expense: €100
-- Switch to PKR
-- Same expense shows: Rs. 30,350
-- Switch back to EUR
-- Shows: €100
+---
 
-### 7. User-Friendly Interface
-**Features:**
-- Clean and modern design
-- Easy navigation
-- Quick actions
-- Visual feedback
-- Smooth animations
+## 🚀 Getting Started
 
-**Onboarding:**
-- Welcome screen for new users
-- Quick tour of features
-- Easy to get started
+### Prerequisites
+* [Node.js](https://nodejs.org/) (v18 or higher recommended)
+* [Expo Go](https://expo.dev/go) app on iOS or Android device, OR configured Android Studio / Xcode simulators.
+* A free [Supabase](https://supabase.com/) account.
 
-## 🛠️ Technology Stack
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Hkmrkhan/pocketly.git
+cd pocketly
+```
 
-### Mobile App Development
-**Framework & Language:**
-- React Native
-- Expo (Development tools and platform)
-- TypeScript (Type-safe JavaScript)
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-**UI Components:**
-- React Native Core Components
-- Ionicons (Icons)
-- Custom styled components
+### 3. Configure Environment Variables
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+Update the `.env` file with your Supabase credentials:
+```env
+EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-**Navigation:**
-- Expo Router (Screen navigation)
-- Tab-based navigation
+### 4. Run the Application
+```bash
+# Start Metro bundler
+npx expo start
 
-### Backend & Database
-**Database:**
-- Supabase (PostgreSQL database)
-- Real-time data synchronization
-- Cloud storage
+# Run on Android emulator / device
+npx expo start --android
 
-**Authentication:**
-- Supabase Auth
-- Secure user sessions
-- Email/password login
+# Run on iOS simulator
+npx expo start --ios
 
-### Data Storage
-**Local Storage:**
-- AsyncStorage (Currency preferences)
-- Offline data caching
+# Run on Web
+npx expo start --web
+```
 
-**Cloud Storage:**
-- Supabase Tables:
-  - Expenses table
-  - Events table
-  - User profiles
+---
 
-### State Management
-**React Features:**
-- useState (Component state)
-- useEffect (Side effects)
-- useContext (Global state)
-- Custom Hooks (Reusable logic)
+## 🗄️ Database Setup
 
-**Context API:**
-- AuthContext (User authentication)
-- OnboardingContext (First-time user flow)
+Run the included [`supabase-setup.sql`](./supabase-setup.sql) script in your Supabase SQL Editor:
 
-### Architecture
-- Pattern: Component-Based Architecture
-- Modular components
-- Reusable UI elements
-- Service layer for API calls
+1. Open your Supabase Dashboard -> **SQL Editor**.
+2. Paste the contents of `supabase-setup.sql`.
+3. Click **Run**.
 
-## 📈 Performance Features
-- **Fast Loading:** Optimized component rendering
-- **Smooth Scrolling:** Efficient list virtualization
-- **Quick Actions:** Instant UI feedback
-- **Offline Support:** Local data caching
+### Schema Highlights:
+* **`expenses` table**: Tracks daily transactions (`id`, `user_id`, `amount`, `description`, `category`, `created_at`, `updated_at`).
+* **`events` table**: Tracks event transactions (`id`, `user_id`, `event_name`, `amount`, `event_date`, `created_at`, `updated_at`).
+* **Row Level Security (RLS)**: Strictly restricts all `SELECT`, `INSERT`, `UPDATE`, and `DELETE` actions to `auth.uid() = user_id`.
+* **Automatic Timestamps**: PostgreSQL triggers to maintain `updated_at` automatically.
 
-## 🔒 Security
-- **User Authentication:** Secure login system
-- **Data Privacy:** Each user's data is isolated
-- **Encrypted Storage:** Secure data transmission
-- **Session Management:** Automatic logout options
+---
 
-## ✨ Key Benefits
-**For Users:**
-- ✅ No manual currency conversion needed
-- ✅ Track expenses in multiple currencies
-- ✅ Organize spending by events
-- ✅ Simple and intuitive interface
-- ✅ Secure and private
+## 📂 Project Structure
 
-**For Developers:**
-- • Modern React Native architecture
-- • Type-safe with TypeScript
-- • Scalable database design
-- • Clean code structure
-- • Easy to maintain and extend
+```text
+mydailyexpense-new/
+├── app/                        # Expo Router screen navigation
+│   ├── (tabs)/                 # Bottom tab bar routes
+│   │   ├── _layout.tsx         # Custom floating curved tab bar
+│   │   ├── index.tsx           # Home expense tracking & dashboard
+│   │   ├── events.tsx          # Events list & category search
+│   │   ├── event-details.tsx   # Detailed category/event transactions
+│   │   └── profile.tsx         # User profile, preferences, & settings
+│   ├── auth/                   # Authentication routes
+│   │   └── reset-password.tsx  # Deep-linked password recovery screen
+│   ├── _layout.tsx             # Root app provider setup
+│   └── modal.tsx               # Utility modal route
+├── assets/                     # Images, icons, and fonts
+├── components/                 # Reusable UI components
+│   ├── auth/                   # LoginForm, SignupForm
+│   ├── expense/                # ExpenseCard, ExpenseForm, ExpenseList, ExpenseSummary
+│   └── onboarding/             # OnboardingScreen
+├── contexts/                   # Global state providers (Auth, Onboarding)
+├── lib/
+│   ├── api/                    # Supabase API services (auth, expenses)
+│   └── supabase.ts             # Supabase client initialization
+├── types/                      # TypeScript database and form models
+├── utils/                      # Currency, emoji, and date formatters
+├── supabase-setup.sql          # Full database DDL, indexes, and RLS policies
+└── app.json                    # Expo application configuration
+```
 
-## 🚀 Future Possibilities
-- Budget alerts and spending limits
-- Visual charts and analytics
-- Export data to CSV/PDF
-- Receipt photo upload
-- Split bills with friends
-- Recurring expense tracking
-- Multi-device sync
+---
 
-## 📝 Summary
-Pocketly is a complete expense tracking solution that makes managing money simple and efficient. With multi-currency support, event-based tracking, and an intuitive interface, users can:
-- Track expenses in their preferred currency
-- Organize spending by events
-- View summaries and totals instantly
-- Switch between currencies effortlessly
-- Keep their financial data secure
+## 🔒 Security Best Practices
 
-**Built With:** React Native, Expo, TypeScript, Supabase
-**Status:** ✅ Production Ready
+* **Zero Sensitive Exposure:** Secrets and credentials are managed via environment variables and ignored by Git.
+* **Database Isolation:** Database queries enforce user isolation through PostgreSQL RLS policies at the database layer.
+* **PKCE Auth Flow:** Supabase authentication uses PKCE flow to protect tokens during deep-linking and browser handoffs.
+
+---
+
+## 👤 Author
+
+Developed with ❤️ by **[Hkmrkhan](https://github.com/Hkmrkhan)**.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
