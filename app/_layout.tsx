@@ -4,9 +4,13 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
+import * as NavigationBar from 'expo-navigation-bar';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { OnboardingProvider } from '@/contexts/OnboardingContext';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -38,6 +42,20 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  // Configure navigation bar globally for all pages
+  useEffect(() => {
+    const setupNavigationBar = async () => {
+      if (Platform.OS === 'android') {
+        // Make navigation bar transparent and position content behind it
+        await NavigationBar.setBackgroundColorAsync('transparent');
+        await NavigationBar.setPositionAsync('absolute');
+        await NavigationBar.setButtonStyleAsync('light'); // White icons
+        await NavigationBar.setBorderColorAsync('transparent');
+      }
+    };
+    setupNavigationBar();
+  }, []);
+
   if (!loaded) {
     return null;
   }
@@ -49,11 +67,15 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <AuthProvider>
+      <OnboardingProvider>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          </Stack>
+        </ThemeProvider>
+      </OnboardingProvider>
+    </AuthProvider>
   );
 }

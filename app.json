@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "mydailyexpense-new",
-    "slug": "mydailyexpense-new",
+    "name": "POCKETLY",
+    "slug": "pocketly-daily-expenses",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logoreal.png",
     "scheme": "mydailyexpensenew",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-icon.png",
+      "image": "./assets/images/logoreal.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,23 +17,38 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.pocketly.dailyexpenses",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/logoreal.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "softwareKeyboardLayoutMode": "pan",
+      "statusBar": {
+        "barStyle": "dark-content",
+        "backgroundColor": "#F5F7FA"
+      },
+      "navigationBar": {
+        "visible": "sticky",
+        "backgroundColor": "#4CAF50"
+      }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logoreal.png"
     },
     "plugins": [
       "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "dac90a06-4356-46ba-83e0-fe41a99f3a1c"
+      }
     }
   }
 }
